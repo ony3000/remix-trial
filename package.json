@@ -7,6 +7,7 @@
     "seed": "node --require esbuild-register prisma/seed.ts"
   },
   "scripts": {
+    "reset:db": "rm -f prisma/dev.db && prisma db push && prisma db seed",
     "build": "remix build",
     "dev": "remix dev",
     "postinstall": "remix setup node",
