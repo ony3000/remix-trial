@@ -2,11 +2,15 @@ import type { ActionFunction, LinksFunction } from "remix";
 import {
   useActionData,
   json,
-  Link,
-  useSearchParams
+  useSearchParams,
+  Link
 } from "remix";
 import { db } from "~/utils/db.server";
-import { login, createUserSession } from "~/utils/session.server";
+import {
+  createUserSession,
+  login,
+  register
+} from "~/utils/session.server";
 import stylesUrl from "../styles/login.css";
 
 export const links: LinksFunction = () => {
@@ -89,12 +93,14 @@ export const action: ActionFunction = async ({
           formError: `User with username ${username} already exists`
         });
       }
-      // create the user
-      // create their session and redirect to /jokes
-      return badRequest({
-        fields,
-        formError: "Not implemented"
-      });
+      const user = await register({ username, password });
+      if (!user) {
+        return badRequest({
+          fields,
+          formError: `Something went wrong trying to create a new user.`
+        });
+      }
+      return createUserSession(user.id, redirectTo);
     }
     default: {
       return badRequest({
