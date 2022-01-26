@@ -1,4 +1,8 @@
-import type { ActionFunction, LinksFunction } from "remix";
+import type {
+  ActionFunction,
+  LinksFunction,
+  MetaFunction
+} from "remix";
 import {
   useActionData,
   json,
@@ -15,6 +19,14 @@ import stylesUrl from "../styles/login.css";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
+};
+
+export const meta: MetaFunction = () => {
+  return {
+    title: "Remix Jokes | Login",
+    description:
+      "Login to submit your own jokes to Remix Jokes!"
+  };
 };
 
 function validateUsername(username: unknown) {
@@ -76,10 +88,10 @@ export const action: ActionFunction = async ({
     case "login": {
       const user = await login({ username, password });
       if (!user) {
-        return {
+        return badRequest({
           fields,
           formError: `Username/Password combination is incorrect`
-        };
+        });
       }
       return createUserSession(user.id, redirectTo);
     }
