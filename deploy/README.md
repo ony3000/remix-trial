@@ -19,6 +19,7 @@ $ sudo systemctl enable remix-jokes.service
 $ git fetch
 $ git checkout (RELEASE_VERSION)
 
+$ nvm use 16
 $ npm install
 $ npm run build
 
