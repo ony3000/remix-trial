@@ -2,7 +2,7 @@
 Description=Remix - Jokes App Tutorial
 
 [Service]
-ExecStart=${which npm} start
+ExecStart=/bin/bash -c "$(which npm) start"
 WorkingDirectory=
 
 # Restart service after 10 seconds if service crashes
