@@ -21,6 +21,10 @@ $ git checkout (RELEASE_VERSION)
 
 $ nvm use 16
 $ npm install
+
+# When first deploying only
+$ npm run reset:db
+
 $ npm run build
 
 # When first deploying
