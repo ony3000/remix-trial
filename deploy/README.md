@@ -3,7 +3,16 @@
 * Requirements
   * Node 16+
 
-1. Launch server with systemd
+1. Set environment variables
+
+``` bash
+$ cp .env.example .env
+
+# Then you need to fill in the empty values in the env file.
+$ vim .env
+```
+
+2. Launch server with systemd
 
 ``` bash
 # First, you need to fill in the empty WorkingDirectory value in the service file.
@@ -13,7 +22,7 @@ $ sudo cp remix-jokes.service /etc/systemd/system
 $ sudo systemctl enable remix-jokes.service
 ```
 
-2. Deploy
+3. Deploy
 
 ``` bash
 $ git fetch
