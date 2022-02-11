@@ -2,6 +2,11 @@
 
 - [Remix Docs](https://remix.run/docs)
 
+## Prerequisites
+
+- Node.js &ge; 14
+- npm &ge; 7
+
 ## Development
 
 From your terminal:
