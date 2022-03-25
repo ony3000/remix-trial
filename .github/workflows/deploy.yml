@@ -1,0 +1,26 @@
+name: Deploy to Amazon Lightsail
+
+on:
+  push:
+    branches:
+      - deploy-docker
+
+jobs:
+  deploy-by-ssh:
+    name: SSH Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{ secrets.AWS_HOST }}
+        username: ${{ secrets.AWS_USERNAME }}
+        key: ${{ secrets.AWS_KEY }}
+        port: 22
+        script_stop: true
+        script: |
+          cd ~/html/demo.ekswaizi.xyz
+          git checkout deploy-docker
+          git pull origin deploy-docker
+          sudo docker-compose up --build -d
+          sudo docker system prune -f
