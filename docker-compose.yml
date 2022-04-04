@@ -6,6 +6,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    # nginx를 통해 proxy_pass 할 것이므로, 이 container는 포트를 개방할 필요 없음.
+    # ports:
+    #   - 4000:3000
+    restart: on-failure
+
+  nginx:
+    image: nginx:alpine
     ports:
-      - 4000:3000
+      - 80:80
     restart: on-failure
