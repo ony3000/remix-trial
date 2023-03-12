@@ -17,10 +17,14 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16.x
-        cache: 'npm'
+    - name: Use pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 7
+        run_install: false
 
-    - run: npm ci
-    - run: npm run build
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm run build
 
     - name: Copy file using ssh key
       uses: appleboy/scp-action@v0.1.2
