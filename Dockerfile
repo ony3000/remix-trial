@@ -2,8 +2,8 @@
 FROM node:16-alpine
 WORKDIR /app
 COPY package* ./
-RUN npm install
+RUN pnpm install
 COPY . .
-RUN npm run build
-CMD ["npm", "start"]
+RUN pnpm run build
+CMD ["pnpm", "run", "start"]
 EXPOSE 3000
